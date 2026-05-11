@@ -3,15 +3,24 @@
 #define MAX_MAKANAN 50
 
 typedef enum {
-
+	LayakKirim, 
+    MakananKaryawan, 
+    DaurUlang
 } StatusKelayakan;
 
 typedef union {
-
+	char tujuanPengiriman[50]; 
+    char divisiKaryawan[50];   
+    char jenisDaurUlang[50];
 } InfoTambahan;
 
 typedef struct {
-
+	char nama[50];
+    float karbo, protein, lemak;
+    int skorKarbo, skorProtein, skorLemak;
+    float rataRata;
+    StatusKelayakan status;
+    InfoTambahan info;
 } Makanan;
 
 int hitungSkorKarbohidrat(float gram) {
