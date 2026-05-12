@@ -77,7 +77,21 @@ int hitungSkorProtein(float protein) {
 }
 
 int hitungSkorLemak(float lemak) {
-
+    if (lemak >= 14 && lemak <= 20) {
+        return 5;
+    }
+    else if (lemak >= 10 && lemak <= 13) {
+        return 4;
+    }
+    else if ((lemak >= 7 && lemak <= 9) || (lemak >= 21 && lemak <= 25)) {
+        return 3;
+    }
+    else if ((lemak >= 4 && lemak <= 6) || (lemak >= 26 && lemak <= 30)) {
+        return 2;
+    }
+    else if ((lemak < 4) || (lemak > 30)) {
+        return 1;
+    }
 }
 
 void hitungKomposisi(Makanan *makanan) {
@@ -110,11 +124,11 @@ void tampilkanTabelReferensi() {
     printf("========================================================================\n");
     printf("| Skor | Kalori (30%%) | Protein (40%%) | Karbo (20%%) | Lemak (10%%) |\n");
     printf("|------|--------------|---------------|-------------|-------------|\n");
-    printf("|  5   | 500-650 kkal | >= 40 g       | 70-90 g     | 14-20 g     |\n");
+    printf("|  5   | 500-650 kkal | 40+ g         | 70-90 g     | 14-20 g     |\n");
     printf("|  4   | 450-500/650+ | 30-40 g       | 60-70 g     | 10-13 g     |\n");
-    printf("|  3   | 400-450/750+ | 20-30 g       | 50-60/90+   | 7-9 g       |\n");
-    printf("|  2   | 300-400/850+ | 10-20 g       | 40-50/110+  | 4-6 g       |\n");
-    printf("|  1   | <300 / >950  | < 10 g        | <40 / >130  | < 4 g       |\n");
+    printf("|  3   | 400-450/750+ | 20-30 g       | 50-60/90+   | 7-9/21-25 g |\n");
+    printf("|  2   | 300-400/850+ | 10-20 g       | 40-50/110+  | 4-6/26-30 g |\n");
+    printf("|  1   | <300 / >950  | <10 g         | <40 / >130  | <4/30+ g    |\n");
     printf("========================================================================\n");
     printf(" INFO PEMBOBOTAN:\n");
     printf(" 1. Protein (40%%)\n");
