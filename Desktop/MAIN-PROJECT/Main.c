@@ -58,11 +58,25 @@ int hitungSkorKarbohidrat(float karbo) {
     }
 }
 
-int hitungSkorProtein(float gram) {
-
+int hitungSkorProtein(float protein) {
+    if (protein >= 40) {
+        return 5;
+    }
+    else if (protein >= 30 && protein <= 40) {
+        return 4;
+    }
+    else if (protein >= 20 && protein <= 30) {
+        return 3;
+    }
+    else if (protein >= 10 && protein <= 20) {
+        return 2;
+    }
+    else if (protein < 10) {
+        return 1;
+    }
 }
 
-int hitungSkorLemak(float gram) {
+int hitungSkorLemak(float lemak) {
 
 }
 
@@ -96,10 +110,10 @@ void tampilkanTabelReferensi() {
     printf("========================================================================\n");
     printf("| Skor | Kalori (30%%) | Protein (40%%) | Karbo (20%%) | Lemak (10%%) |\n");
     printf("|------|--------------|---------------|-------------|-------------|\n");
-    printf("|  5   | 500-650 kkal | >= 25 g       | 70-90 g     | 14-20 g     |\n");
-    printf("|  4   | 450-500/650+ | 20-24 g       | 60-70 g     | 10-13 g     |\n");
-    printf("|  3   | 400-450/750+ | 15-19 g       | 50-60/90+   | 7-9 g       |\n");
-    printf("|  2   | 300-400/850+ | 10-14 g       | 40-50/110+  | 4-6 g       |\n");
+    printf("|  5   | 500-650 kkal | >= 40 g       | 70-90 g     | 14-20 g     |\n");
+    printf("|  4   | 450-500/650+ | 30-40 g       | 60-70 g     | 10-13 g     |\n");
+    printf("|  3   | 400-450/750+ | 20-30 g       | 50-60/90+   | 7-9 g       |\n");
+    printf("|  2   | 300-400/850+ | 10-20 g       | 40-50/110+  | 4-6 g       |\n");
     printf("|  1   | <300 / >950  | < 10 g        | <40 / >130  | < 4 g       |\n");
     printf("========================================================================\n");
     printf(" INFO PEMBOBOTAN:\n");
