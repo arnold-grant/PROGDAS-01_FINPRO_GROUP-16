@@ -109,19 +109,52 @@ void kelolosanSkorMakanan(Makanan *makanan) {
 }
 
 void penentuanDistribusi(Makanan *makanan) {
+	getchar();
+	switch (makanan->status) {
+		case LAYAK_KIRIM: 
+			printf("Masukkan Kota Tujuan Pengiriman: ");
+            fgets(makanan->info.tujuanPengiriman, 50, stdin);
+            makanan->info.tujuanPengiriman[strcspn(makanan->info.tujuanPengiriman, "\n")] = 0;
+            break;
+        case MAKANAN_KARYAWAN:
+        	printf("Masukkan Divisi Karyawan Penerima: ");
+            fgets(makanan->info.divisiKaryawan, 50, stdin);
+            makanan->info.divisiKaryawan[strcspn(makanan->info.divisiKaryawan, "\n")] = 0;
+            break;
+        case DAUR_ULANG:
+            if (makanan->isAman == 0) strcpy(makanan->info.jenisDaurUlang, "LIMBAH B3 - MUSNAHKAN");
+            else {
+            	printf("Masukkan Jenis Daur Ulang (Pupuk/Pakan): ");
+                fgets(makanan->info.jenisDaurUlang, 50, stdin);
+                makanan->info.jenisDaurUlang[strcspn(makanan->info.jenisDaurUlang, "\n")] = 0;
+			}
+			break;
+	}
 
 }
 
 void inputMakanan(Makanan *makanan) {
-
+	printf("\n--- FORM INPUT MAKANAN ---\n");
+    printf("Nama Menu: ");
+    scanf(" %[^\n]s", makanan->nama);
+    printf("Gramasi Protein : "); scanf("%f", &makanan->protein);
+    printf("Gramasi Karbo   : "); scanf("%f", &makanan->karbo);
+    printf("Gramasi Lemak   : "); scanf("%f", &makanan->lemak);
+    printf("Status Keamanan (1:Aman, 0:Bahaya): "); 
+	scanf("%d", &makanan->isAman);
 }
 
 void tampilHasilMakanan(const Makanan *makanan) {
-
-}
-
-void tampilRingkasan(Makanan *daftarMakanan, int jumlah) {
-	
+	printf("\n>> LAPORAN QC: %s\n", makanan->nama);
+    printf("   [KEAMANAN]     : %s\n", (makanan->isAman ? "AMAN" : "!!! TERKONTAMINASI !!!"));
+    printf("   [ENERGI TOTAL] : %.2f kkal\n", makanan->totalKalori);
+    printf("   [RINCIAN SKOR] : P:%d(40%%) | Kal:%d(30%%) | K:%d(20%%) | L:%d(10%%)\n", 
+           makanan->skorProtein, makanan->skorKalori, makanan->skorKarbo, makanan->skorLemak);
+    printf("   [INDEKS AKHIR] : %.2f / 5.00\n", makanan->rataRataBobot);
+    printf("   [STATUS]       : ");
+    if (makanan->status == LAYAK_KIRIM) printf("LAYAK KIRIM [%s]\n", makanan->info.tujuanPengiriman);
+    else if (makanan->status == MAKANAN_KARYAWAN) printf("MAKANAN KARYAWAN [%s]\n", makanan->info.divisiKaryawan);
+    else printf("DAUR ULANG [%s]\n", makanan->info.jenisDaurUlang);
 }
 
 void tampilkanTabelReferensi() {
@@ -144,10 +177,6 @@ void tampilkanTabelReferensi() {
     printf(" CATATAN: Jika Status Makanan = Expired, Skor otomatis 0.00.\n");
     printf("\t  Jika Status Makanan = MendekatiExpired, Kelayakan automatis menjadi MakananKaryawan.\n");
     printf("========================================================================\n");
-}
-
-void tampilanMenu() {
-
 }
 
 int main() {
