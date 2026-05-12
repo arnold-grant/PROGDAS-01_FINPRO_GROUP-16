@@ -41,51 +41,15 @@ int hitungSkorKalori (float kalori) {
 }
 
 int hitungSkorKarbohidrat(float gram) {
-	if (gram >= 70 && gram <= 90) {
-	return 5;
-	}
-    if (gram >= 60 && gram < 70) {
-	return 4;
-	}
-    if ((gram >= 50 && gram < 60) || (gram > 90 && gram <= 110)) {
-	return 3;
-	}
-    if ((gram >= 40 && gram < 50) || (gram > 110 && gram <= 130)) {
-	return 2;
-	}
-    return 1;
+
 }
 
 int hitungSkorProtein(float gram) {
-	if (gram >= 25) {
-	return 5;
-	}
-    if (gram >= 20) {
-	return 4;
-	}
-    if (gram >= 15) {
-	return 3;
-	}
-    if (gram >= 10) {
-	return 2;
-	}
-    return 1;
+
 }
 
 int hitungSkorLemak(float gram) {
-	if (gram >= 14 && gram <= 20) {
-	return 5;
-	}
-    if (gram >= 10 && gram < 14) {
-	return 4;
-	}
-    if ((gram >= 7 && gram < 10) || (gram > 20 && gram <= 25)) {
-	return 3;
-	}
-    if ((gram >= 4 && gram < 7) || (gram > 25 && gram <= 30)) {
-	return 2;
-	}
-    return 1;
+
 }
 
 void hitungKomposisi(Makanan *makanan) {
@@ -110,6 +74,27 @@ void tampilHasilMakanan(const Makanan *makanan) {
 
 void tampilRingkasan(Makanan *daftarMakanan, int jumlah) {
 	
+}
+
+void tampilkanTabelReferensi() {
+    printf("\n========================================================================\n");
+    printf("            STANDAR QC & REFERENSI PEMBOBOTAN NUTRISI MBG\n");
+    printf("========================================================================\n");
+    printf("| Skor | Kalori (30%%) | Protein (40%%) | Karbo (20%%) | Lemak (10%%) |\n");
+    printf("|------|--------------|---------------|-------------|-------------|\n");
+    printf("|  5   | 500-650 kkal | >= 25 g       | 70-90 g     | 14-20 g     |\n");
+    printf("|  4   | 450-500/650+ | 20-24 g       | 60-70 g     | 10-13 g     |\n");
+    printf("|  3   | 400-450/750+ | 15-19 g       | 50-60/90+   | 7-9 g       |\n");
+    printf("|  2   | 300-400/850+ | 10-14 g       | 40-50/110+  | 4-6 g       |\n");
+    printf("|  1   | <300 / >950  | < 10 g        | <40 / >130  | < 4 g       |\n");
+    printf("========================================================================\n");
+    printf(" INFO PEMBOBOTAN:\n");
+    printf(" 1. Protein (40%%)\n");
+    printf(" 2. Kalori (30%%)\n");
+    printf(" 3. Karbo (20%%)\n");
+    printf(" 4. Lemak (10%%)\n");
+    printf(" CATATAN: Jika Uji Keamanan = BERBAHAYA, Skor otomatis 0.00.\n");
+    printf("========================================================================\n");
 }
 
 void tampilanMenu() {
