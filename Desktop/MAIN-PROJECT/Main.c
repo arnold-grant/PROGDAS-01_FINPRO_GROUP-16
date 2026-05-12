@@ -12,16 +12,33 @@ typedef union {
 	char tujuanPengiriman[50]; 
     char divisiKaryawan[50];   
     char jenisDaurUlang[50];
-} InfoTambahan;
+} Distribusi;
 
 typedef struct {
 	char nama[50];
-    float karbo, protein, lemak;
-    int skorKarbo, skorProtein, skorLemak;
-    float rataRata;
+    float karbo, protein, lemak, kalori;
+    int skorKarbo, skorProtein, skorLemak, skorKalori;
+    int bersih;
+    float averageBobot;
     StatusKelayakan status;
-    InfoTambahan info;
+    Distribusi info;
 } Makanan;
+
+int hitungSkorKalori (float kalori) {
+	if (kalori >= 500 && kalori <= 650) {
+	return 5;
+	}
+    if ((kalori >= 450 && kalori < 500) || (kalori > 650 && kalori <= 750)) {
+	return 4;
+	}
+    if ((kalori >= 400 && kalori < 450) || (kalori > 750 && kalori <= 850)) {
+	return 3;
+	}
+    if ((kalori >= 300 && kalori < 400) || (kalori > 850 && kalori <= 950)) {
+	return 2;
+	}
+    return 1;
+}
 
 int hitungSkorKarbohidrat(float gram) {
 
