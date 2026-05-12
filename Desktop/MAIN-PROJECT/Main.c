@@ -41,15 +41,51 @@ int hitungSkorKalori (float kalori) {
 }
 
 int hitungSkorKarbohidrat(float gram) {
-
+	if (gram >= 70 && gram <= 90) {
+	return 5;
+	}
+    if (gram >= 60 && gram < 70) {
+	return 4;
+	}
+    if ((gram >= 50 && gram < 60) || (gram > 90 && gram <= 110)) {
+	return 3;
+	}
+    if ((gram >= 40 && gram < 50) || (gram > 110 && gram <= 130)) {
+	return 2;
+	}
+    return 1;
 }
 
 int hitungSkorProtein(float gram) {
-
+	if (gram >= 25) {
+	return 5;
+	}
+    if (gram >= 20) {
+	return 4;
+	}
+    if (gram >= 15) {
+	return 3;
+	}
+    if (gram >= 10) {
+	return 2;
+	}
+    return 1;
 }
 
 int hitungSkorLemak(float gram) {
-
+	if (gram >= 14 && gram <= 20) {
+	return 5;
+	}
+    if (gram >= 10 && gram < 14) {
+	return 4;
+	}
+    if ((gram >= 7 && gram < 10) || (gram > 20 && gram <= 25)) {
+	return 3;
+	}
+    if ((gram >= 4 && gram < 7) || (gram > 25 && gram <= 30)) {
+	return 2;
+	}
+    return 1;
 }
 
 void hitungKomposisi(Makanan *makanan) {
