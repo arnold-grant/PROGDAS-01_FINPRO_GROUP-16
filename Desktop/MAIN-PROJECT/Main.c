@@ -141,7 +141,8 @@ void tampilkanTabelReferensi() {
     printf(" 2. Kalori (30%%)\n");
     printf(" 3. Karbo (20%%)\n");
     printf(" 4. Lemak (10%%)\n");
-    printf(" CATATAN: Jika Uji Keamanan = BERBAHAYA, Skor otomatis 0.00.\n");
+    printf(" CATATAN: Jika Status Makanan = Expired, Skor otomatis 0.00.\n");
+    printf("\t  Jika Status Makanan = MendekatiExpired, Kelayakan automatis menjadi MakananKaryawan.\n");
     printf("========================================================================\n");
 }
 
@@ -150,6 +151,6 @@ void tampilanMenu() {
 }
 
 int main() {
-
+    tampilkanTabelReferensi();
     return 0;
 }
