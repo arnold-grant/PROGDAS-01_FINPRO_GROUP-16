@@ -14,6 +14,12 @@ typedef union {
     char jenisDaurUlang[50];
 } Distribusi;
 
+typedef enum {
+    Expired,
+    MendekatiExpired,
+    JauhDariExpired
+}StatusMakanan;
+
 typedef struct {
 	char nama[50];
     float karbo, protein, lemak, kalori;
