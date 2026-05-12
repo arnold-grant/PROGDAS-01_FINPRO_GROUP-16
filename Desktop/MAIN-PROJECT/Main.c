@@ -76,6 +76,27 @@ void tampilRingkasan(Makanan *daftarMakanan, int jumlah) {
 	
 }
 
+void tampilkanTabelReferensi() {
+    printf("\n========================================================================\n");
+    printf("            STANDAR QC & REFERENSI PEMBOBOTAN NUTRISI MBG\n");
+    printf("========================================================================\n");
+    printf("| Skor | Kalori (30%%) | Protein (40%%) | Karbo (20%%) | Lemak (10%%) |\n");
+    printf("|------|--------------|---------------|-------------|-------------|\n");
+    printf("|  5   | 500-650 kkal | >= 25 g       | 70-90 g     | 14-20 g     |\n");
+    printf("|  4   | 450-500/650+ | 20-24 g       | 60-70 g     | 10-13 g     |\n");
+    printf("|  3   | 400-450/750+ | 15-19 g       | 50-60/90+   | 7-9 g       |\n");
+    printf("|  2   | 300-400/850+ | 10-14 g       | 40-50/110+  | 4-6 g       |\n");
+    printf("|  1   | <300 / >950  | < 10 g        | <40 / >130  | < 4 g       |\n");
+    printf("========================================================================\n");
+    printf(" INFO PEMBOBOTAN:\n");
+    printf(" 1. Protein (40%%)\n");
+    printf(" 2. Kalori (30%%)\n");
+    printf(" 3. Karbo (20%%)\n");
+    printf(" 4. Lemak (10%%)\n");
+    printf(" CATATAN: Jika Uji Keamanan = BERBAHAYA, Skor otomatis 0.00.\n");
+    printf("========================================================================\n");
+}
+
 void tampilanMenu() {
 
 }
