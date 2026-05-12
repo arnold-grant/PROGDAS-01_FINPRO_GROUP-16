@@ -26,22 +26,36 @@ typedef struct {
 
 int hitungSkorKalori (float kalori) {
 	if (kalori >= 500 && kalori <= 650) {
-	return 5;
+	    return 5;
 	}
-    if ((kalori >= 450 && kalori < 500) || (kalori > 650 && kalori <= 750)) {
-	return 4;
+    else if ((kalori >= 450 && kalori < 500) || (kalori > 650)) {
+	    return 4;
 	}
-    if ((kalori >= 400 && kalori < 450) || (kalori > 750 && kalori <= 850)) {
-	return 3;
+    else if ((kalori >= 400 && kalori < 450) || (kalori > 750)) {
+	    return 3;
 	}
-    if ((kalori >= 300 && kalori < 400) || (kalori > 850 && kalori <= 950)) {
-	return 2;
+    else if ((kalori >= 300 && kalori < 400) || (kalori > 850)) {
+	    return 2;
 	}
     return 1;
 }
 
-int hitungSkorKarbohidrat(float gram) {
-
+int hitungSkorKarbohidrat(float karbo) {
+    if (karbo >= 70 && karbo <= 90) {
+        return 5;
+    }
+    else if (karbo >= 60 && karbo <= 70) {
+        return 4;
+    }
+    else if ((karbo >= 50 && karbo <= 60) || (karbo >= 90)) {
+        return 3;
+    }
+    else if ((karbo >= 40 && karbo <= 50) || (karbo >= 110)) {
+        return 2;
+    }
+    else if ((karbo < 40 || karbo > 130)) {
+        return 1;
+    }
 }
 
 int hitungSkorProtein(float gram) {
