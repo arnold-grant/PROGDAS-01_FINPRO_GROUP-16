@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#define MAX_MAKANAN 50
+#define MaksimumJenis 50
 
 typedef enum {
 	LayakKirim, 
@@ -26,6 +26,7 @@ typedef struct {
     int skorKarbo, skorProtein, skorLemak, skorKalori;
     int bersih;
     float averageBobot;
+    StatusMakanan segar;
     StatusKelayakan status;
     Distribusi info;
 } Makanan;
@@ -180,6 +181,29 @@ void tampilkanTabelReferensi() {
 }
 
 int main() {
-    tampilkanTabelReferensi();
+    Makanan daftar[MaksimumJenis];
+    int jumlah = 0, pilihan;
+
+    do {
+        printf("\n===Kontrol Kualitas Makanan Bergizi Gratis===\n");
+        printf("1.Analisis Menu Baru\n2. Lihat Tabel Detail Referensi\n3. Tampilkan Seluruh Menu\n0. Keluar\nPilihan: ");
+        scanf("%d", &pilihan);
+        if (pilihan == 1 && jumlah < MaksimumJenis) {
+            inputMakanan(&daftar[jumlah]);
+            hitungKomposisi(&daftar[jumlah]);
+            kelolosanSkorMakanan(&daftar[jumlah]);
+            penentuanDistribusi(&daftar[jumlah]);
+            tampilHasilMakanan(&daftar[jumlah]);
+            jumlah++;
+        }
+        else if(pilihan == 2){
+            tampilkanTabelReferensi();
+        }
+        else if(pilihan == 3){
+            for(int i = 0; i < jumlah; i++) {
+                tampilHasilMakanan(&daftar[i]);
+            }
+        }
+    }while(pilihan != 0);
     return 0;
 }
