@@ -235,8 +235,8 @@ int main() {
         if (pilihan == 1 && jumlah < MaksimumJenis) {
             inputMakanan(&daftar[jumlah]);
             hitungKomposisi(&daftar[jumlah]);
-            KesegaranMakanan(&daftar[jumlah]);
             kelolosanSkorMakanan(&daftar[jumlah]);
+            KesegaranMakanan(&daftar[jumlah]);
             penentuanDistribusi(&daftar[jumlah]);
             tampilHasilMakanan(&daftar[jumlah]);
             jumlah++;
