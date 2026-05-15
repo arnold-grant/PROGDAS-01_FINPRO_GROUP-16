@@ -101,11 +101,31 @@ int hitungSkorLemak(float lemak) {
     }
 }
 
-void hitungKomposisi(Makanan *makanan) {
+void hitungKomposisi(Makanan *Makanan) {
+    Makanan->kalori = (Makanan->karbo * 4.0) + (Makanan->protein * 4.0) + (Makanan->lemak * 9.0);
+    Makanan->skorKarbo = hitungSkorKarbohidrat(Makanan->karbo);
+    Makanan->skorProtein = hitungSkorProtein(Makanan->protein);
+    Makanan->skorLemak = hitungSkorLemak(Makanan->lemak);
+    Makanan->skorKalori = hitungSkorKalori(Makanan->kalori);
 
+    if (Makanan->bersih == 0) {
+        Makanan->averageBobot = 0.0;
+    }
+    else {
+        Makanan->averageBobot = (Makanan->skorProtein * 0.4) + (Makanan->skorKalori * 0.3) + (Makanan->skorKarbo * 0.2) + (Makanan->skorLemak * 0.1);
+    }
 }
 
-void kelolosanSkorMakanan(Makanan *makanan) {
+void kelolosanSkorMakanan(Makanan *Makanan) {
+    if (Makanan->averageBobot >= 4.0){
+        Makanan->status = LayakKirim;
+    }
+    else if (Makanan->averageBobot >= 3.0){
+    Makanan->status = MakananKaryawan;    
+    }
+    else{
+        Makanan->status = DaurUlang;
+    }
 
 }
 
