@@ -26,7 +26,8 @@ typedef struct {
     int skorKarbo, skorProtein, skorLemak, skorKalori;
     int bersih;
     float averageBobot;
-    StatusMakanan segar;
+    int segar;
+    StatusMakanan kesegaran;
     StatusKelayakan status;
     Distribusi info;
 } Makanan;
@@ -129,6 +130,21 @@ void kelolosanSkorMakanan(Makanan *Makanan) {
 
 }
 
+void KesegaranMakanan(Makanan *Makanan) {
+    if (Makanan->segar == 1) {
+        Makanan->kesegaran = JauhDariExpired; 
+    }
+    else if (Makanan->segar == 2) {
+        Makanan->kesegaran = MendekatiExpired;
+        Makanan->status = MakananKaryawan;
+    }
+    else if (Makanan->segar == 3) {
+        Makanan->kesegaran = Expired;
+        Makanan->averageBobot = 0.0;
+        Makanan->status = DaurUlang;
+    }
+}
+
 void penentuanDistribusi(Makanan *Makanan) {
 	getchar();
 	switch (Makanan->status) {
@@ -143,7 +159,7 @@ void penentuanDistribusi(Makanan *Makanan) {
             Makanan->info.divisiKaryawan[strcspn(Makanan->info.divisiKaryawan, "\n")] = 0;
             break;
         case DaurUlang:
-            if (Makanan->segar == 0) strcpy(Makanan->info.jenisDaurUlang, "LIMBAH B3 - MUSNAHKAN");
+            if (Makanan->bersih == 0) strcpy(Makanan->info.jenisDaurUlang, "LIMBAH B3 - MUSNAHKAN");
             else {
             	printf("Masukkan Jenis Daur Ulang (Pupuk/Pakan): ");
                 fgets(Makanan->info.jenisDaurUlang, 50, stdin);
@@ -158,19 +174,28 @@ void inputMakanan(Makanan *Makanan) {
 	printf("\n--- FORM INPUT MAKANAN ---\n");
     printf("Nama Menu: ");
     scanf(" %[^\n]s", Makanan->nama);
-    printf("Gramasi Protein : "); scanf("%f", &Makanan->protein);
-    printf("Gramasi Karbo   : "); scanf("%f", &Makanan->karbo);
-    printf("Gramasi Lemak   : "); scanf("%f", &Makanan->lemak);
-    printf("Status Keamanan (1:Aman, 0:Bahaya): "); 
-	scanf("%d", &Makanan->segar);
+    printf("Gramasi Protein : "); 
+    scanf("%f", &Makanan->protein);
+    printf("Gramasi Karbo   : "); 
+    scanf("%f", &Makanan->karbo);
+    printf("Gramasi Lemak   : "); 
+    scanf("%f", &Makanan->lemak);
+    printf("Status kebersihan (1.Bersih, 0.Kotor): "); 
+	scanf("%d", &Makanan->bersih);
+    printf("Kesegaran Menu (1.JauhDariExpired, 2.MendekatiExpired, 3.Expired): "); 
+    scanf("%d", &Makanan->segar);
 }
 
 void tampilHasilMakanan(const Makanan *Makanan) {
 	printf("\n>> LAPORAN QC: %s\n", Makanan->nama);
-    printf("   [KEAMANAN]     : %s\n", (Makanan->segar ? "AMAN" : "!!! TERKONTAMINASI !!!"));
+    printf("   [KEAMANAN]     : %s\n", (Makanan->bersih ? "AMAN" : "!!! TERKONTAMINASI !!!"));
     printf("   [ENERGI TOTAL] : %.2f kkal\n", Makanan->kalori);
     printf("   [RINCIAN SKOR] : P:%d(40%%) | Kal:%d(30%%) | K:%d(20%%) | L:%d(10%%)\n", Makanan->skorProtein, Makanan->skorKalori, Makanan->skorKarbo, Makanan->skorLemak);
     printf("   [INDEKS AKHIR] : %.2f / 5.00\n", Makanan->averageBobot);
+    printf("   [KESEGARAN]    : ");
+    if (Makanan->kesegaran == JauhDariExpired) printf("Jauh Dari Tanggal Expired\n");
+    else if (Makanan->kesegaran == MendekatiExpired) printf("Sudah Mendekati Tanggal Expired\n");
+    else if (Makanan->kesegaran == Expired) printf("Makanan Sudah Expired\n");
     printf("   [STATUS]       : ");
     if (Makanan->status == LayakKirim) printf("LAYAK KIRIM [%s]\n", Makanan->info.tujuanPengiriman);
     else if (Makanan->status == MakananKaryawan) printf("MAKANAN KARYAWAN [%s]\n", Makanan->info.divisiKaryawan);
@@ -191,9 +216,9 @@ void tampilkanTabelReferensi() {
     printf("========================================================================\n");
     printf(" INFO PEMBOBOTAN:\n");
     printf(" 1. Protein (40%%)\n");
-    printf(" 2. Kalori (30%%)\n");
-    printf(" 3. Karbo (20%%)\n");
-    printf(" 4. Lemak (10%%)\n");
+    printf(" 2. Kalori  (30%%)\n");
+    printf(" 3. Karbo   (20%%)\n");
+    printf(" 4. Lemak   (10%%)\n");
     printf(" CATATAN: Jika Status Makanan = Expired, Skor otomatis 0.00.\n");
     printf("\t  Jika Status Makanan = MendekatiExpired, Kelayakan automatis menjadi MakananKaryawan.\n");
     printf("========================================================================\n");
@@ -204,12 +229,13 @@ int main() {
     int jumlah = 0, pilihan;
 
     do {
-        printf("\n===Kontrol Kualitas Makanan Bergizi Gratis===\n");
-        printf("1.Analisis Menu Baru\n2. Lihat Tabel Detail Referensi\n3. Tampilkan Seluruh Menu\n0. Keluar\nPilihan: ");
+        printf("\n================Kontrol Kualitas Makanan Bergizi Gratis================\n");
+        printf("1. Analisis Menu Baru\n2. Lihat Tabel Detail Referensi\n3. Tampilkan Seluruh Menu\n0. Keluar\nPilihan: ");
         scanf("%d", &pilihan);
         if (pilihan == 1 && jumlah < MaksimumJenis) {
             inputMakanan(&daftar[jumlah]);
             hitungKomposisi(&daftar[jumlah]);
+            KesegaranMakanan(&daftar[jumlah]);
             kelolosanSkorMakanan(&daftar[jumlah]);
             penentuanDistribusi(&daftar[jumlah]);
             tampilHasilMakanan(&daftar[jumlah]);
