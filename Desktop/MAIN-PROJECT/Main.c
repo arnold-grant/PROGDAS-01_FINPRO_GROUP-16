@@ -19,20 +19,12 @@ typedef union {
     char jenisDaurUlang[50];
 } Distribusi;
 
-typedef enum {
-    Expired,
-    MendekatiExpired,
-    JauhDariExpired
-} StatusMakanan;
-
 typedef struct {
     char nama[50];
     float karbo, protein, lemak, kalori;
     int skorKarbo, skorProtein, skorLemak, skorKalori;
     int bersih;
     float averageBobot;
-    int sisaWaktuJam; 
-    StatusMakanan kesegaran;
     StatusKelayakan status;
     Distribusi info;
 } Makanan;
@@ -49,7 +41,6 @@ int hitungSkorKarbohidrat(float karbo) {
     if (karbo >= 70 && karbo <= 90) return 5;
     if (karbo >= 60 && karbo < 70) return 4;
     if ((karbo >= 50 && karbo < 60) || (karbo > 90 && karbo <= 110)) return 3; 
-    if ((karbo >= 50 && karbo < 60) || (karbo > 90 && karbo <= 110)) return 3;
     if ((karbo >= 40 && karbo < 50) || (karbo > 110 && karbo <= 130)) return 2;
     return 1;
 }
