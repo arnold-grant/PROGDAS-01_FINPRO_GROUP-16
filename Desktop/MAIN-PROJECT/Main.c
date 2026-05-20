@@ -55,7 +55,7 @@ int hitungSkorProtein(float protein) {
 
 int hitungSkorLemak(float lemak) {
     if (lemak >= 14 && lemak <= 20) return 5;
-    if (lemak >= 10 && lemak < 13) return 4;
+    if (lemak >= 10 && lemak < 14) return 4;
     if ((lemak >= 7 && lemak < 10) || (lemak > 20 && lemak <= 25)) return 3;
     if ((lemak >= 4 && lemak < 7) || (lemak > 25 && lemak <= 30)) return 2;
     return 1;
